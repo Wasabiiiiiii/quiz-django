@@ -25,3 +25,5 @@ are all configured in GET except for the last endpoint which allows a post call 
   </ul>
 
 <h3>I had to add the django-invitations package directly from the wheel files because the one present in PyPi has a bug that didn't allow me to send Signals correctly via the request.</h3>
+
+<h3>Secrets files were included for convenience since it is a Dev build.</h3>
