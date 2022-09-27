@@ -1,0 +1,11 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Invite accepted" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Invite Accepted!" %}</h1>
+
+<p>{% trans "please check your email, we have sent you your login credentials! " %}</p>
+{% endblock %}

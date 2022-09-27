@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Add User quiz {% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+	<form action="/add_user_quiz/" method="POST"> {% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="btn btn-info">Submit</button>
+	</form>
+	{% if user_added %}
+	<script>
+		$('.btn').hide();
+	</script>
+	<h1>User added to Quiz </h1>
+	{% endif %}
+</div>
+{% endblock %}

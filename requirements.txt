@@ -1,0 +1,8 @@
+django-allauth
+six
+django-filter
+django==3.2.15
+django-admin-export-action
+django_rest_framework
+djangorestframework-simplejwt
+django-multi-email-field

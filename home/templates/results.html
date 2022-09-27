@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load template_tags %}
+{% block title %} Results {% endblock %}
+
+{% block body %}
+{%  if request.user|has_group:"creator"%}
+<div class="container mt-4">
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Quiz</th>
+        <th>User</th>
+        <th>Quiz Description</th>
+        <th>Quiz Status</th>
+        <th>Score</th>
+        <th></th>
+      </tr>
+    </thead>
+    {% for mark in marks %}
+    <tr>
+      <td>{{mark.quiz}}</td>
+      <td>{{mark.user}}</td>
+      <td>{{mark.quiz.desc}}</td>
+      <td>{% if mark.is_complete %}Complete {% else %}Pending{% endif %}</td>
+      <td>{{ mark.score }}%</td>
+      {% if mark.is_complete %}
+      <td><a id='sendresults' href="{% url 'send_results' my_id=mark.quiz.id user_id=mark.user.id %}"
+          class='btn btn-dark'>Notify Partecipant</a>
+
+        {% else %}
+      <td><button id='sendresults' class='btn disabled'>Notify Partecipant</>
+          {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<div class="container mt-4">
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Quiz</th>
+        <th>Answer</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    {% for answer in answers %}
+    <tr>
+      {% with answer.answer as answer %}
+      <td>{{answer.question.quiz}}</td>
+      <td>{{answer}}</td>
+      {% endwith %}
+      <td>{{answer.user}}</td>
+
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% else %}
+<div class="container mt-4">
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Quiz</th>
+        <th>Quiz Description</th>
+        <th>Quiz Status</th>
+      </tr>
+    </thead>
+    {% for mark in marks %}
+    <tr>
+      <td>{{mark.quiz}}</td>
+      <td>{{mark.quiz.desc}}</td>
+      <td>{% if mark.is_complete %}Complete {% else %}Pending{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div class="container mt-4">
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Quiz</th>
+        <th>Answer</th>
+      </tr>
+    </thead>
+    {% for answer in answers %}
+    <tr>
+      {% with answer.answer as answer %}
+      <td>{{answer.question.quiz}}</td>
+      <td>{{answer}}</td>
+      {% endwith %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+
+{%endblock %}

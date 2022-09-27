@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %} Quiz {% endblock %}
+{% block css %}
+<style>
+  .attempt {
+    --gradient: linear-gradient(to left top, #c724dd 10%, #aaaaaa 90%) !important;
+  }
+
+  body {
+    background: #e5eeff;
+  }
+
+  .card {
+    background: #white;
+    border: 2px solid #2c3577;
+    color: #2c3577;
+    margin-bottom: 3rem;
+  }
+
+  #btn {
+    border: 5px solid #2c3577;
+    border-image-slice: 1;
+    background: #white !important;
+    text-decoration: none;
+    position: relative;
+    left: 80px;
+  }
+
+
+
+  #btn:hover,
+  #btn:focus {
+    background: #e5eeff !important;
+    border: 5px solid #2c3577 !important;
+    box-shadow: #222 1px 0 10px;
+    color: #2c3577 !important;
+    text-decoration: none !important;
+  }
+
+  .container-fluid {
+    height: 60px;
+  }
+</style>
+{% endblock %}
+{% load static %}
+
+{% block body %}
+
+<div class="container">
+  <div class="container mx-auto mt-2">
+    <div class="row">
+
+      {% for i in quiz %}
+      <div class="col-md-4">
+        <div class="card" style="width: 21rem;">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">{{i.quiz.name|capfirst}}</h5>
+            <br>
+            <p class="card-text">Status: {% if i.is_complete %}Complete{% else %}Pending{% endif %}</p>
+            {% if not i.is_complete %}
+            <a id="btn" style="justify-content: center;" href="/{{i.quiz.id}}" class=" btn">Start
+              Quiz</a>{% else %} <p>
+              Score:
+              {{i.score }} %</p>
+            <p>Quiz already completed{% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if quiz_present %}
+  <h1>Quiz with the same name already added.
+    {% endif %}
+</div>
+{% endblock %}
