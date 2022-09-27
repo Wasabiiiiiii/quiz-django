@@ -23,3 +23,5 @@ are all configured in GET except for the last endpoint which allows a post call 
     <li>Invitation management needs to be integrated with django's sand_mass_mail system and the management of an email list in the form part.</li>
     <li>Integration of a UUID during score submission by quiz creators to address possible tampering issues </li>
   </ul>
+
+<h3>I had to add the django-invitations package directly from the wheel files because the one present in PyPi has a bug that didn't allow me to send Signals correctly via the request.</h3>
