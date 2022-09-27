@@ -11,7 +11,6 @@ class QuizForm(forms.ModelForm):
         super(QuizForm, self).__init__(*args, **kwargs)
         current_user = User.objects.filter(
             id=self.request.user.id)
-        print(current_user)
         self.fields['created_by'] = forms.ModelChoiceField(queryset=current_user, initial=current_user.first(),
                                                            required=True, widget=forms.HiddenInput())
 

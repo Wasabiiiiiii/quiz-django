@@ -118,7 +118,6 @@ class QuizQuestionDetailApiView(APIView):
                 {"res": "Object with quiz id does not exists"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        print(istance)
         serializer = AnswerSerializer(istance, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)

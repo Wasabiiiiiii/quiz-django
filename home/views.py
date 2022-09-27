@@ -38,7 +38,6 @@ class quizdataView(View):
         for q in Question.objects.filter(quiz=myid):
             answers = []
             for a in Answer.objects.filter(question=q.id):
-                print(a)
                 answers.append(a.content)
             questions.append({str(q): answers})
         return JsonResponse({
@@ -56,7 +55,6 @@ class quizsaveView(View):
             data_.pop('csrfmiddlewaretoken')
 
             for k in data_.keys():
-                print('key: ', k)
                 question = Question.objects.get(content=k, quiz=myid)
                 questions.append(question)
 
@@ -213,7 +211,6 @@ class resultsView(View):
     def post(self, request):
         if request.is_ajax():
             data = request.POST.get('quiz', None)
-            print(data)
             marks = UserQuiz.objects.all()
             return render(request, "results.html", {'marks': marks})
         else:
